@@ -32,14 +32,13 @@ const mongoose = require("mongoose"), // mongoose를 요청
   dbName = "ut-nodejs";
 
 // 데이터베이스 연결 설정
-mongoose.connect(`mongodb://127.0.0.1:27017/${dbName}`, {
-  useNewUrlParser: true,
-});
+mongoose.connect(
+  "mongodb+srv://ut-node:1234@ut-node.kv6iahy.mongodb.net/?retryWrites=true&w=majority&appName=UT-NODE"
+);
 
-// 연결되면 메시지를 보냄
 const db = mongoose.connection;
 db.once("open", () => {
-  console.log(`Connected to ${dbName} MongoDB using Mongoose!`);
+  console.log("db is connect!");
 });
 
 /**
