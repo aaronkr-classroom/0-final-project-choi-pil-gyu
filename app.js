@@ -17,6 +17,7 @@ const pagesController = require("./controllers/pagesController"),
   subscribersController = require("./controllers/subscribersController"),
   usersController = require("./controllers/usersController"),
   coursesController = require("./controllers/coursesController"),
+  BookController = require("./controllers/BookController"),
   talksController = require("./controllers/talksController"),
   trainsController = require("./controllers/trainsController"),
   errorController = require("./controllers/errorController");
@@ -28,10 +29,8 @@ const pagesController = require("./controllers/pagesController"),
  */
 
 // 애플리케이션에 Mongoose 설정
-const mongoose = require("mongoose"), // mongoose를 요청
-  dbName = "ut-nodejs";
+const mongoose = require("mongoose"); // mongoose를 요청
 
-// 데이터베이스 연결 설정
 mongoose.connect(
   "mongodb+srv://ut-node:1234@ut-node.kv6iahy.mongodb.net/?retryWrites=true&w=majority&appName=UT-NODE"
 );
@@ -150,6 +149,17 @@ router.delete(
   coursesController.delete,
   coursesController.redirectView
 );
+
+/**
+ * Books
+ */
+router.get("/books", BookController.index);
+router.get("/books/new", BookController.new);
+router.post("/books/create", BookController.create, BookController.redirectView);
+router.get("/books/:id", BookController.show);
+router.get("/books/:id/edit", BookController.edit);
+router.put("/books/:id/update", BookController.update, BookController.redirectView);
+router.delete("/books/:id/delete", BookController.delete, BookController.redirectView);
 
 /**
  * Talks
